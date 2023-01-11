@@ -20,15 +20,14 @@ public class SpringSecurityConfiguration {
 	public InMemoryUserDetailsManager createUserDetailsManager() {
 		UserDetails userDetails1 = createNewUser("Ninja", "123");
 		UserDetails userDetails2 = createNewUser("Ninja2", "123123");
-		
+
 		return new InMemoryUserDetailsManager(userDetails1, userDetails2);
 	}
 
 	private UserDetails createNewUser(String username, String password) {
 		Function<String, String> passwordEncoder = input -> passwordEncoder().encode(input);
-		
-		UserDetails userDetails = User.builder().passwordEncoder(passwordEncoder)
-				.username(username).password(password)
+
+		UserDetails userDetails = User.builder().passwordEncoder(passwordEncoder).username(username).password(password)
 				.roles("USER", "ADMIN").build();
 		return userDetails;
 	}
@@ -37,17 +36,16 @@ public class SpringSecurityConfiguration {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		// when we override SecurityFilterChain, we need to define entire chain again
-		httpSecurity.authorizeHttpRequests(
-				auth -> auth.anyRequest().authenticated());
+		httpSecurity.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
 		httpSecurity.formLogin(withDefaults());
-		
+
 		httpSecurity.csrf().disable();
 		httpSecurity.headers().frameOptions().disable();
-		
+
 		return httpSecurity.build();
 	}
 }
