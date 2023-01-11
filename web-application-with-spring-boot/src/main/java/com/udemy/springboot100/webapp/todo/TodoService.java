@@ -16,27 +16,27 @@ public class TodoService {
 	private static int todosCount = 0;
 	static {
 		todos.add(new Todo(todosCount++, "Ninja", "learn Devops", LocalDate.now().plusYears(2), false));
-		todos.add(new Todo(todosCount++, "Ninja", "learn GCP", LocalDate.now().plusYears(3), false));
+		todos.add(new Todo(todosCount++, "Ninja", "Google Cloud Certification", LocalDate.now().plusYears(3), false));
 	}
-	
+
 	public List<Todo> findByUserName(String username) {
 		Predicate<? super Todo> predicate = todo -> todo.getUsername().equals(username);
 		return todos.stream().filter(predicate).toList();
 	}
-	
+
 	public void addTodo(String username, String description, LocalDate targetDate, boolean isDone) {
 		Todo todo = new Todo(++todosCount, username, description, targetDate, isDone);
 		todos.add(todo);
 	}
-	
-	public void deleteById(int id) {		
+
+	public void deleteById(int id) {
 		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
 		todos.removeIf(predicate);
 	}
 
 	public Todo findById(int id) {
 		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
-		Todo  todo = todos.stream().filter(predicate).findFirst().get();
+		Todo todo = todos.stream().filter(predicate).findFirst().get();
 		return todo;
 	}
 
