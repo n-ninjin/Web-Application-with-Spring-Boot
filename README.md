@@ -1,5 +1,5 @@
 # web-application-with-spring-boot
-## My Spring Boot Training
+## My Spring Boot review
 
 ####  Todo Web App with Spring Boot
 
