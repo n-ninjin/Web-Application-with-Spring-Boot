@@ -1,5 +1,5 @@
 # web-application-with-spring-boot
-## My Spring Boot Review
+## Spring Boot Review
 
 ####  Todo Web App with Spring Boot
 
